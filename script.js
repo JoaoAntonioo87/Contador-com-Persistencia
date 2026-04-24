@@ -1,28 +1,16 @@
-"use strict";
-
 const number = document.querySelector("#number");
-number.innerText = localStorage.getItem("number");
-let save = localStorage.setItem("number", number.innerText);
+number.innerText = localStorage.getItem("number") || 0;
 
 const buttons = Array.from(document.querySelectorAll("button"));
 buttons.forEach((btn) =>
   btn.addEventListener("click", function () {
-    switch (btn.id) {
-      case "plus":
-        number.innerText++;
-        save = localStorage.setItem("number", number.innerText);
-        break;
-      case "minus":
-        number.innerText--;
-        save = localStorage.setItem("number", number.innerText);
-        break;
-      case "reset":
-        number.innerText = 0;
-        save = localStorage.setItem("number", number.innerText);
-        break;
-      default:
-        number.innerText = 0;
-        save = localStorage.setItem("number", number.innerText);
+    if (btn.id === "plus") {
+      number.innerText++;
+    } else if (btn.id === "minus") {
+      number.innerText--;
+    } else {
+      number.innerText = 0;
     }
+    localStorage.setItem("number", number.innerText);
   }),
 );
